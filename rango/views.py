@@ -6,7 +6,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.urls import reverse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
+
+def index(request):
+        context_dict = {'boldmessage': 'Crunchy, creamy, cookie, candy, cupcake!'}
+
+        return render(request, 'rango/index.html', context=context_dict)
+
 
 def register(request):
     registered = False
