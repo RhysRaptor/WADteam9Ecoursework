@@ -29,7 +29,8 @@ class Category(models.Model):
 
 class Meme(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    title = models.CharField(max_length=128, default="meme")
     image = models.ImageField(upload_to='memes')
     
     def __str__(self):
-        return self.image
+        return self.title
