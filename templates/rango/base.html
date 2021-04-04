@@ -21,15 +21,13 @@
 		<div>
 			<ul>
 				{% if user.is_authenticated %}
-					<!--  this doesn't work yet -->
-					<!-- <li><a href="{% url 'rango :upload' %}">Upload</a></li> -->
+
 					<li><a href="{% url 'rango:logout' %}">Logout</a></li>
 					
 				{% else %}
 				
 					<li><a href="{% url 'rango:register' %}">Sign Up</a></li>
 					<li><a href="{% url 'rango:login' %}">Login</a></li>
-					<li><a href="{% url 'rango:      allmemes' %}">All Memes</a></li>
 					
 				{% endif %}
 			</ul>
