@@ -11,8 +11,11 @@ from rango.models import Category, Meme
 
 def index(request):
     category_list = Category.objects.order_by('-likes')
+    meme_list = Meme.objects.order_by('-likes')[:1]
+
     context_dict = {}
     context_dict['categories'] = category_list
+    context_dict['memes'] = meme_list
 
     return render(request, 'rango/index.html', context=context_dict)
 
