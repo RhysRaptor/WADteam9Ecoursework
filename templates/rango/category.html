@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Category
+{% endblock %}
+
+{% block body_block %}
+	<head>
+		<title>Rango</title>
+	</head>
+
+	<body>
+		<div>
+			{% if category %}
+				<h1>{{ category.name }}</h1>
+				{% if memes %}
+					<ul>
+						{% for meme in memes %}
+							<img src= "{{MEDIA_URL}}{{meme.image}}" alt="{{meme.title}}"/>
+						{% endfor %}
+					</ul>
+				{% else %}
+					<strong>No memes currently in category.</strong>
+				{% endif %}
+			{% else %}
+				The specified category does not exist.
+			{% endif %}
+		</div>
+	</body>
+{% endblock %}

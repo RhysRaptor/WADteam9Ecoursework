@@ -7,11 +7,27 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.urls import reverse
 from django.shortcuts import redirect, render
+from rango.models import Category, Meme
 
 def index(request):
-        context_dict = {'boldmessage': 'Crunchy, creamy, cookie, candy, cupcake!'}
+    category_list = Category.objects.order_by('-likes')
+    context_dict = {}
+    context_dict['categories'] = category_list
 
-        return render(request, 'rango/index.html', context=context_dict)
+    return render(request, 'rango/index.html', context=context_dict)
+
+def show_category(request, category_name_slug):
+    context_dict = {}
+
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        memes = Meme.objects.filter(category=category)
+        context_dict['memes'] = memes
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        context_dict['category'] = None
+        context_dict['memes'] = None
+    return render(request, 'rango/category.html', context=context_dict)
 
 
 def register(request):

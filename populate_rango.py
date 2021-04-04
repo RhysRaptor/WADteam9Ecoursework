@@ -8,21 +8,21 @@ from rango.models import Category, Meme
 def populate():
 	video_games_memes = [
 		{'title': 'wanda_thanos_endgame',
-		'image' : 'media/wanda_thanos_endgame.jpg'},
+		'image' : 'wanda_thanos_endgame.jpg'},
 		{'title': 'mandalorian_getting_carried',
-		'image' : 'media/mandalorian_getting_carried.jpg'},
+		'image' : 'mandalorian_getting_carried.jpg'},
 		{'title': 'incredibles_coincidence',
-		'image' : 'media/incredibles_concidence.jpg'}]
+		'image' : 'incredibles_coincidence.jpg'}]
 
 	spongebob_memes = [
 		{'title': 'spongebob_exam',
-		'image' : 'media/spongebob_exam.jpg'},
+		'image' : 'spongebob_exam.jpg'},
 		{'title': 'spongebob_microwave',
-		'image' : 'media/spongebob_microwave.jpg'},
+		'image' : 'spongebob_microwave.jpg'},
 		{'title': 'spongebob_shellphone',
-		'image' : 'media/spongebob_shellphone.jpg'}]
+		'image' : 'spongebob_shellphone.jpg'}]
 
-	cats = {'video Games': {'memes' : video_games_memes},
+	cats = {'Video Games': {'memes' : video_games_memes},
 			'Spongebob': {'memes': spongebob_memes}}
 
 	for cat, cat_data in cats.items():
