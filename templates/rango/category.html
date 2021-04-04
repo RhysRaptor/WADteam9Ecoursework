@@ -25,6 +25,10 @@
 				{% else %}
 					<strong>No memes currently in category.</strong>
 				{% endif %}
+
+				{% if user.is_authenticated %}
+					<a href="{% url 'rango:upload' category.slug %}">Add Meme</a> <br />
+				{% endif %}
 			{% else %}
 				The specified category does not exist.
 			{% endif %}

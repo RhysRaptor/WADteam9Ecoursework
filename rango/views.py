@@ -1,4 +1,4 @@
-from rango.forms import UserForm, UserProfileForm
+from rango.forms import UserForm, UserProfileForm, MemeForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -31,6 +31,35 @@ def show_category(request, category_name_slug):
         context_dict['category'] = None
         context_dict['memes'] = None
     return render(request, 'rango/category.html', context=context_dict)
+
+def add_meme(request, category_name_slug):
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+    except Category.DoesNotExist:
+        category = None
+    
+    if category is None:
+        return redirect('/rango/')
+
+    form = MemeForm()
+
+    if request.method == 'POST':
+        form = MemeForm(request.POST, request.FILES)
+        if form.is_valid():
+            if category:
+                meme = form.save(commit=False)
+                meme.category = category
+                meme.likes = 0
+                meme.save()
+
+                return redirect(reverse('rango:show_category',
+                                        kwargs={'category_name_slug':
+                                        category_name_slug}))
+        else:
+            print(form.errors)
+
+    context_dict = {'form': form, 'category': category}
+    return render(request, 'rango/upload.html', context=context_dict)
 
 
 def register(request):

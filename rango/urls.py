@@ -12,5 +12,6 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('category/<slug:category_name_slug>/',
 		  views.show_category, name='show_category'),
+    path('category/<slug:category_name_slug>/upload/', views.add_meme, name='upload'),
 
 ]
