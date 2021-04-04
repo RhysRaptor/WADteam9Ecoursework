@@ -16,11 +16,11 @@ def populate():
 
 	spongebob_memes = [
 		{'title': 'spongebob_exam',
-		'image' : 'spongebob_exam.jpg'},
+		'image' : 'media/spongebob_exam.jpg'},
 		{'title': 'spongebob_microwave',
-		'image' : 'spongebob_microwave.jpg'},
+		'image' : 'media/spongebob_microwave.jpg'},
 		{'title': 'spongebob_shellphone',
-		'image' : 'spongebob_shellphone.jpg'}]
+		'image' : 'media/spongebob_shellphone.jpg'}]
 
 	cats = {'video Games': {'memes' : video_games_memes},
 			'Spongebob': {'memes': spongebob_memes}}
