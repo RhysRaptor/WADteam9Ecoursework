@@ -29,7 +29,7 @@ class Category(models.Model):
 
 class Meme(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    title = models.CharField(max_length=128, default="meme")
+    title = models.CharField(max_length=128)
     image = models.ImageField(upload_to='memes')
     
     def __str__(self):
