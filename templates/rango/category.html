@@ -18,7 +18,8 @@
 				{% if memes %}
 					<ul>
 						{% for meme in memes %}
-							<img src= "{{MEDIA_URL}}{{meme.image}}" alt="{{meme.title}}"/>
+							<li><img src= "{{MEDIA_URL}}{{meme.image}}" alt="{{meme.title}}" width="300" height="400"/>
+							</li>
 						{% endfor %}
 					</ul>
 				{% else %}
