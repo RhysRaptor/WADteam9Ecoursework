@@ -35,10 +35,12 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'rango:index' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'rango:allmemes' 'wanda_thanos_engame' %}">All Memes</a></li>
                         {% if user.is_authenticated %}
+						
                         <li class="nav-item"><a class="nav-link" href="{% url 'rango:logout' %}?next=/rango/">Logout</a></li>
+						
                         {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'rango:register' %}">Register Here</a></li>
-                        <li class="nav-item "><a class="nav-link" href="{% url 'rango:login' %}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'registration_register' %}">Register Here</a></li>
+                        <li class="nav-item "><a class="nav-link" href="{% url 'auth_login' %}">Login</a></li>
                         {% endif %}
                     </ul>
                 </div>
