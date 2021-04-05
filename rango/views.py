@@ -10,6 +10,8 @@ from django.shortcuts import redirect, render
 from rango.models import Category, Meme
 from datetime import datetime
 from django.core.paginator import Paginator
+from django.views import View
+from django.utils.decorators import method_decorator
 
 def index(request):
     category_list = Category.objects.order_by('-likes')
@@ -156,3 +158,20 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
 
     request.session['visits'] = visits
+
+class LikeMemeView(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        meme_id = request.GET['meme_id']
+
+        try:
+            meme = Meme.objects.get(id=int(meme_id))
+        except Meme.DoesNotExist:
+            return HttpResponse(-1)
+        except ValueError:
+            return HttpResponse(-1)
+
+        meme.likes = meme.likes + 1
+        meme.save()
+
+        return HttpResponse(meme.likes)

@@ -14,19 +14,27 @@
 	<body>
 		<div>
 			{% if category %}
-				<h1>{{ category.name }}</h1>
+				<div class="jumbotron p-4">
+					<div class="container">
+						<h1 class="jumbotron-heading">{{category.name}}</h1>
+						<div class="float-right">
+							{% if user.is_authenticated %}
+								<a class="btn btn-primary" href="{% url 'rango:upload' category.slug %}">Add Meme</a> <br />
+							{% endif %}
+						</div>
+					</div>
+				</div>
 				{% if memes %}
 					{% for meme in memes %}
-						<img src= "{{MEDIA_URL}}{{meme.image}}" alt="{{meme.title}}" width="300" height="400"/>
+						<div class="container">
+							<p>{{meme.title}}</p>
+							<img src= "{{MEDIA_URL}}{{meme.image}}" alt="{{meme.title}}" width="300" height="400" class="rounded" /> <br />
+						</div>
 					{% endfor %}
 				{% else %}
 					<strong>No memes currently in category.</strong>
 				{% endif %}
 					</div>
-
-				{% if user.is_authenticated %}
-					<a href="{% url 'rango:upload' category.slug %}">Add Meme</a> <br />
-				{% endif %}
 			{% else %}
 				The specified category does not exist.
 			{% endif %}
