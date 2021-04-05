@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.shortcuts import redirect, render
 from rango.models import Category, Meme
 from datetime import datetime
+from django.core.paginator import Paginator
 
 def index(request):
     category_list = Category.objects.order_by('-likes')
@@ -39,25 +40,14 @@ def show_category(request, category_name_slug):
 
     return render(request, 'rango/category.html', context=context_dict)
 
-def allmemes(request, meme_title_slug):
-    context_dict = {}
-    meme_list = Meme.objects.order_by('-likes')
-    if meme_title_slug == "":
-        meme = meme_list[0]
-    else:
-        for index, item in enumerate(meme_list):
-            if item.slug == meme_title_slug:
-                break
-        else:
-            index = 0
-        if index == len(meme_list) -1:
-            meme = meme_list[0]
-        else:
-            meme = meme_list[index + 1]
+def allmemes(request):
+    meme_list = Meme.objects.all()
+    paginator = Paginator(meme_list,1)
 
-    context_dict['meme'] = meme
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    return render(request, 'rango/allmemes.html', context=context_dict)
+    return render(request, 'rango/allmemes.html', {'page_obj': page_obj})
 
 def add_meme(request, category_name_slug):
     try:
