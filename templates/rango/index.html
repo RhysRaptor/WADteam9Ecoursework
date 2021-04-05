@@ -8,34 +8,21 @@
 {% endblock %}
 	
 {% block body_block %}
-	<h1>Rango says...</h1>
-	<div>
-		{% if user.is_authenticated %}
-			howdy {{ user.username }}!
-		{% else %}
-			hey there partner!
-		{% endif %}
-		<br/>
-		
-		<strong>{{ boldmessage }}</strong><br />
+	<div class="jumbotron p-3">
+		<div class="container">
+			<h1 class="jumbotron-heading">Rango says...</h1>
+			<div>
+				<h2 class="h2">
+				{% if user.is_authenticated %}
+					howdy {{ user.username }}!
+				{% else %}
+					hey there partner!
+				{% endif %}
+				</h2>
+				<strong>{{ boldmessage }}</strong>
+			</div>
+		</div>
 	</div>
-	
-	<div>
-		<h2>Categories</h2>
-	{% if categories %}
-		<ul>
-			{% for category in categories %}
-			<li>
-				<a href="/rango/category/{{ category.slug }}/">{{ category.name }}</a>
-			</li>
-			{% endfor %}
-		</ul>
-	{% else %}
-		<strong>There are no categories present.</strong>
-	{% endif %}
-	</div>
-		
-		
 	<div>
 		<h2>Most Liked Meme</h2>
 	{% if memes %}

@@ -6,13 +6,19 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Login to Rango</h1>
-<form id="login_form" method="post" action="{% url 'rango:login' %}">
-	{% csrf_token %}
-	Username: <input type="text" name="username" value="" size="50" />
-	<br />
-	Password: <input type="password" name="password" value="" size="50" />
-	<br />
-	<input type="submit" value="submit" />
-</form>
+	<div class="jumbotron p-5">
+		<h1 class="jumbotron-heading">Login</h1>
+	<div class="container">
+		<form class="form-signin" role="form" method="post" action=".">
+			{% csrf_token %}
+			<label for="inputUsername" class="sr-only">Username</label>
+			<input type="text" name="username" id="id_username" class="form-control"
+				   placeholder="Username" required autofocus>
+			<label for="inputPassword" class="sr-only">Password</label>
+			<input type="password" name="password" id="id_password" class="form-control"
+				   placeholder="Password" required>
+			<button class="btn btn-lg btn-primary btn-block" type="submit"
+					value="Submit">Sign in</button>
+		</form>
+	</div>
 {% endblock %}
