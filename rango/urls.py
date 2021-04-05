@@ -13,5 +13,5 @@ urlpatterns = [
     path('category/<slug:category_name_slug>/',
 		  views.show_category, name='show_category'),
     path('category/<slug:category_name_slug>/upload/', views.add_meme, name='upload'),
-    path('allmemes/<slug:meme_title_slug>/', views.allmemes, name='allmemes')
+    path('allmemes', views.allmemes, name='allmemes'),
 ]
