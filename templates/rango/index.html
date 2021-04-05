@@ -29,6 +29,18 @@
 		<ul>
 			{% for meme in memes %}
 				<img src= "{{MEDIA_URL}}{{meme.image}}" alt="{{meme.title}}" width="300" height="400"/>
+				<div>
+					<strong id="like_count">{{ meme.likes }}</strong> likes
+					{% if user.is_authenticated %}
+					<button id="like_btn"
+							data-memeid="{{ meme.id }}"
+							class="btn btn-primary btn-sm"
+							type="button">
+						<span data-feather="thumbs-up"></span>
+						Like Meme
+					</button>
+					{% endif %}
+				</div>
 			{% endfor %}
 		</ul>
 	{% else %}
