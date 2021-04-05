@@ -14,6 +14,7 @@
 	<body>
 		<div>
 			{% for meme in page_obj %}
+				<h1>{{ meme.title }}</h1>
 				<div class="img-box">
 					<img src="{{MEDIA_URL}}{{meme.image}}" class="slider-img" width="300" height="400"/>
 				</div>
