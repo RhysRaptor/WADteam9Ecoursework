@@ -22,26 +22,22 @@ def populate():
 		{'title': 'spongebob_shellphone',
 		'image' : 'spongebob_shellphone.jpg'}]
 
-    Doge_memes = [
-    {'title': 'Doge_Bonk',
-	'image' : 'doge-meme-bonk-hit-with-a-stick.jpg'}
-    ]
+	doge_memes = [
+		{'title': 'Doge_Bonk',
+		'image' : 'Doge_bonk.jpg'}]
 
-    Movie_TV_show_memes = [
+	Movie_TV_show_memes = [
+		]
+        
+	Dad_memes = [
+		]
     
-    ]
+	New_memes = [
+		]
 
-    Dad_memes = [
-    
-    ]
-    
-    New_memes = [
-    
-    ]
-    
 	cats = {'Video Games': {'memes' : video_games_memes},
 			'Spongebob': {'memes': spongebob_memes},
-            'Dogo': {'memes': Doge_memes},
+            'Doge': {'memes': doge_memes},
             'Movie/TV shows': {'memes': Movie_TV_show_memes},
             'Dad jokes': {'memes': Dad_memes},
             'New meme formart ': {'memes': New_memes}}
