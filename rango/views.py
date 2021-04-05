@@ -39,11 +39,23 @@ def show_category(request, category_name_slug):
 
     return render(request, 'rango/category.html', context=context_dict)
 
-def allmemes(request):
+def allmemes(request, meme_title_slug):
     context_dict = {}
-    
-    memes = Meme.objects.all()
-    context_dict['memes'] = memes
+    meme_list = Meme.objects.order_by('-likes')
+    if meme_title_slug == "":
+        meme = meme_list[0]
+    else:
+        for index, item in enumerate(meme_list):
+            if item.slug == meme_title_slug:
+                break
+        else:
+            index = 0
+        if index == len(meme_list) -1:
+            meme = meme_list[0]
+        else:
+            meme = meme_list[index + 1]
+
+    context_dict['meme'] = meme
 
     return render(request, 'rango/allmemes.html', context=context_dict)
 

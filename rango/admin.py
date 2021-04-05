@@ -5,6 +5,7 @@ class CategoryAdmin(admin.ModelAdmin):
 	prepopulated_fields = {'slug':('name',)}
 
 class MemeAdmin(admin.ModelAdmin) :
+	prepopulated_fields = {'slug':('title',)}
 	list_display = ('title', 'category', 'image')
 
 admin.site.register(Category, CategoryAdmin)

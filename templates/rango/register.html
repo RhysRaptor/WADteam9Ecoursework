@@ -8,7 +8,9 @@ form {text-align: center;}
 {% endblock %}
 
 {% block body_block %}
-	<h1>Register for Rango</h1>
+	<div class="jumbotron p-5">
+		<h1 class="jumbotron-heading">Register</h1>
+	</div>
 	{% if registered %}
 		Rango says: <strong>thank you for registering!</strong>
 		<a href="{% url 'rango:index' %}">Return to the homepage.</a><br />

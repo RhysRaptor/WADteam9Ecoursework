@@ -30,7 +30,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'rango:index' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'rango:allmemes' %}">All Memes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'rango:allmemes' 'wanda_thanos_engame' %}">All Memes</a></li>
                         {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'rango:logout' %}?next=/rango/">Logout</a></li>
                         {% else %}

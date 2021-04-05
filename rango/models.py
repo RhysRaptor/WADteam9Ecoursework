@@ -14,7 +14,7 @@ class UserProfile(models.Model):
    
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     likes = models.IntegerField(default=0)
     
     def save(self, *args, **kwargs):
@@ -33,6 +33,11 @@ class Meme(models.Model):
     title = models.CharField(max_length=128)
     image = models.ImageField(upload_to='media')
     likes = models.IntegerField(default=0)
+    slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Meme, self).save(*args, **kwargs)
     
     def __str__(self):
         return self.title
