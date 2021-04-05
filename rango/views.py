@@ -1,4 +1,4 @@
-from rango.forms import UserForm, UserProfileForm, MemeForm
+from rango.forms import UserForm, MemeForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -82,7 +82,6 @@ def register(request):
     
     if request.method == 'POST':
         user_form = UserForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
         
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
@@ -101,11 +100,9 @@ def register(request):
             print(user_form.errors, profile_form.errors)
             
     else:
-        user_form = UserForm()
-        profile_form = UserProfileForm()
+        user_form = UserForm()        
         
-        
-    return render(request, 'rango/register.html', context = {'user_form': user_form,'profile_form': profile_form,'registered': registered})
+    return render(request, 'rango/register.html', context = {'user_form': user_form,'registered': registered})
 
 
 def user_login(request):

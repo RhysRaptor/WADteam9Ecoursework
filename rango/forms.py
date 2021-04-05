@@ -7,12 +7,7 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password',)
-
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('website', 'picture',) 
+        fields = ('username', 'password',)
 
 class MemeForm(forms.ModelForm):
 	title = forms.CharField(max_length=128,
