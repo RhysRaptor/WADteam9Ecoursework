@@ -1,26 +1,29 @@
 {% extends 'rango/base.html' %}
+{% load static %}
+
 {% block title_block %}
-Login
+	Login
 {% endblock %}
 
 {% block body_block %}
-<div class="jumbotron p-3">
-<h1>Login</h1>
-</div>
-
-<div class="jumbotron p-3">
-<form method="post" action=".">
-	{% csrf_token %}
-	{{ form.as_p }}
-	<input type="submit" value="Log In" />
-	<input type="hidden" name="next" value="{{ next }}" />
-</form>
-<p>
+	<div class="jumbotron p-5">
+		<h1 class="jumbotron-heading">Login</h1>
+	</div>
+	<div class="container">
+		<form class="form-signin" role="form" method="post" action=".">
+			{% csrf_token %}
+			<label for="inputUsername" class="sr-only">Username</label>
+			<input type="text" name="username" id="id_username" class="form-control"
+				   placeholder="Username" required autofocus>
+			<label for="inputPassword" class="sr-only">Password</label>
+			<input type="password" name="password" id="id_password" class="form-control"
+				   placeholder="Password" required>
+			<button class="btn btn-lg btn-primary btn-block" type="submit"
+					value="Submit">Sign in</button>
+		</form>
+		<p>
 	Not registered?
 	<a href="{% url 'registration_register' %}">Register here!</a>
 </p>
-</div>
-
-<div class="jumbotron p-3">
+	</div>
 {% endblock %}
-</div>

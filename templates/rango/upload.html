@@ -6,12 +6,16 @@
 {% endblock %}
 
 {% block body_block %}
-	<h1>Add a Meme</h1>
-	<div>
-		<form method="post" enctype="multipart/form-data">
+	<div class="jumbotron p-4">
+		<div class="container">
+			<h1 class="jumbotron-heading">Add a Page to {{category.name}}</h1>
+		</div>
+	</div>
+	<div class="container">
+		<form class="form-control-file" method="post" enctype="multipart/form-data">
         	{% csrf_token %}
         	{{ form.as_p }}
-        	<button type="submit">Upload</button>
+        	<button type="submit" class="btn btn-primary">Submit</button>
     	</form>
 	</div>
 {% endblock %}
