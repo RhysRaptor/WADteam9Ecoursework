@@ -39,6 +39,14 @@ def show_category(request, category_name_slug):
 
     return render(request, 'rango/category.html', context=context_dict)
 
+def allmemes(request):
+    context_dict = {}
+    
+    memes = Meme.objects.all()
+    context_dict['memes'] = memes
+
+    return render(request, 'rango/allmemes.html', context=context_dict)
+
 def add_meme(request, category_name_slug):
     try:
         category = Category.objects.get(slug=category_name_slug)

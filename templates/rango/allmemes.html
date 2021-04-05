@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'rango/base.html' %}
+{% load static %}
+
+{% block title_block %}
+	Memes
+{% endblock %}
+
+{% block body_block %}
+	<head>
+		<title>Rango</title>
+	</head>
+
+	<body>
+		<div>
+			{% if memes %}
+				<div class="slider">
+					<div class="img-box">
+						<img src="{{MEDIA_URL}}incredibles_coincidence.jpg" class="slider-img" width="300" height="400"/>
+					</div>
+
+					<button class="btn" onclick="prev()">Prev</button>
+					<button class="btn" onclick="next()">Next</button>
+				</div>
+			{% else %}
+				<strong>No memes currently in category.</strong>
+			{% endif %}
+		</div>
+	</body>
+{% endblock %}

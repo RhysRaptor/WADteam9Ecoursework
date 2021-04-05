@@ -16,15 +16,13 @@
 			{% if category %}
 				<h1>{{ category.name }}</h1>
 				{% if memes %}
-					<ul>
-						{% for meme in memes %}
-							<li><img src= "{{MEDIA_URL}}{{meme.image}}" alt="{{meme.title}}" width="300" height="400"/>
-							</li>
-						{% endfor %}
-					</ul>
+					{% for meme in memes %}
+						<img class="Slides" src= "{{MEDIA_URL}}{{meme.image}}" alt="{{meme.title}}" width="300" height="400"/>
+					{% endfor %}
 				{% else %}
 					<strong>No memes currently in category.</strong>
 				{% endif %}
+					</div>
 
 				{% if user.is_authenticated %}
 					<a href="{% url 'rango:upload' category.slug %}">Add Meme</a> <br />
