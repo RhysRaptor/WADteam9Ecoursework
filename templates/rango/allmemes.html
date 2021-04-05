@@ -18,6 +18,7 @@
 					<div class="img-box">
 						<img src="{{MEDIA_URL}}{{meme.image}}" class="slider-img" width="300" height="400"/>
 					</div>
+					<a href="javascript:history.back()">Previous</a>
 					<a href="{% url 'rango:allmemes' meme.slug %}">Next</a>
 				</div>
 			{% else %}
