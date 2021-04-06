@@ -1,13 +1,14 @@
 $(document).ready(function() {
-	$('#like_btn').click(function() {
+	$('#dislike_btn').click(function() {
 		var catememeIdVar;
 		catememeIdVar = $(this).attr('data-memeid');
 
-		$.get('/rango/like_meme/',
+		$.get('/rango/dislike_meme/',
 			{'meme_id': catememeIdVar},
 			function(data) {
 				$('#like_count').html(data);
-				$('#like_btn').hide();
+				$('#dislike_btn').hide();
 			})
 	});
 });
+

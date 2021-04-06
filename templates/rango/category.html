@@ -26,8 +26,9 @@
 				</div>
 				{% if memes %}
 					{% for meme in memes %}
-						<div class="container">
-							<p>{{meme.title}}</p>
+					<div class="container">
+						<div class="img-box">
+							<p class="lead">{{meme.title}}</p>
 							<img src= "{{MEDIA_URL}}{{meme.image}}" alt="{{meme.title}}" width="300" height="400" class="rounded" /> <br />
 						</div>
 						<div>
@@ -42,6 +43,9 @@
 							</button>
 							{% endif %}
 						</div>
+						<hr>
+						<br />
+					</div>
 					{% endfor %}
 				{% else %}
 					<strong>No memes currently in category.</strong>
