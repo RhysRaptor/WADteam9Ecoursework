@@ -15,5 +15,6 @@ urlpatterns = [
     path('allmemes/<slug:meme_title_slug>/', views.allmemes, name='allmemes'),
     path('allmemes', views.allmemes, name='allmemes'),
     path('like_meme/', views.LikeMemeView.as_view(), name='like_meme'),
+    path('profile/<username>/', views.ProfileView.as_view(), name='profile'),
 
 ]
