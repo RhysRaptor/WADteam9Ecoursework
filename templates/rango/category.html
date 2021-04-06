@@ -19,7 +19,7 @@
 						<h1 class="jumbotron-heading">{{category.name}}</h1>
 						<div class="float-right">
 							{% if user.is_authenticated %}
-								<a class="btn btn-primary" href="{% url 'rango:upload' category.slug %}">Add Meme</a> <br />
+								<a class="btn btn-primary" href="{% url 'rango:upload' category.slug %}">Add Meme to this category</a> <br />
 							{% endif %}
 						</div>
 					</div>
@@ -31,7 +31,7 @@
 							<p class="lead">{{meme.title}}</p>
 							<img src= "{{MEDIA_URL}}{{meme.image}}" alt="{{meme.title}}" width="300" height="400" class="rounded" /> <br />
 						</div>
-						<div>
+						<div class="p-3">
 							<strong id="like_count">{{ meme.likes }}</strong> likes
 							{% if user.is_authenticated %}
 							<button id="like_btn"
@@ -41,8 +41,26 @@
 								<span data-feather="thumbs-up"></span>
 								Like Meme
 							</button>
+							
 							{% endif %}
 						</div>
+						
+						<div class="p-3">
+							<strong id="like_count">{{ meme.dislikes }}</strong> dislikes
+							{% if user.is_authenticated %}
+							<button id="dislike_btn"
+									data-memeid="{{ meme.id }}"
+									class="btn btn-primary btn-sm"
+									type="button"
+									button class=red>
+								<span data-feather="thumbs-down"></span>
+								Dislike Meme
+							</button>
+							
+							{% endif %}
+						</div>
+						
+						
 						<hr>
 						<br />
 					</div>

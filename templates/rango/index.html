@@ -42,6 +42,21 @@
 					</button>
 					{% endif %}
 				</div>
+				
+				<div class="p-3">
+					<strong id="like_count">{{ meme.dislikes }}</strong> dislikes
+					{% if user.is_authenticated %}
+					<button id="dislike_btn"
+							data-memeid="{{ meme.id }}"
+							class="btn btn-primary btn-sm"
+							type="button"
+							button class=red>
+						<span data-feather="thumbs-down"></span>
+						Dislike Meme
+					</button>
+					{% endif %}
+				</div>
+				
 			{% endfor %}
 			<br />
 			<div class ="pagination">

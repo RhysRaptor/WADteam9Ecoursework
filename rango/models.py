@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
  
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    website = models.URLField(blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
    
     def __str__(self):
@@ -16,6 +15,7 @@ class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
     slug = models.SlugField(unique=True)
     likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -33,6 +33,7 @@ class Meme(models.Model):
     title = models.CharField(max_length=128)
     image = models.ImageField(upload_to='media')
     likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):

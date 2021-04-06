@@ -14,24 +14,22 @@
 
 	<div class="container">
 		<div class="row">
+		<div class="jumbotron p-3">
 			<img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
 				 width="300"
 				 height="300"
 				 alt="{{ selected_user.username }}'s profile image" />
 			<br />
-			<div>
+		</div>
+			<div class="p-5">
 				{% if selected_user == user %}
 				<form method="post" action="." enctype="multipart/form-data">
 					{% csrf_token %}
 					{{ form.as_p }}
 
-					<input type="submit" value="Update" />
+					<input type="submit" value="Update Profile" />
 				</form>
 				{% else %}
-				<p>
-					<strong>Website:</strong>
-					<a href="{{ user_profile.website }}">{{ user_profile.website }}</a>
-				</p>
 				{% endif %}
 			</div>
 		</div>

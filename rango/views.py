@@ -61,6 +61,7 @@ def add_meme(request, category_name_slug):
                 meme = form.save(commit=False)
                 meme.category = category
                 meme.likes = 0
+                meme.dislikes = 0
                 meme.save()
 
                 return redirect(reverse('rango:show_category',
@@ -174,6 +175,23 @@ class LikeMemeView(View):
         meme.save()
 
         return HttpResponse(meme.likes)
+        
+class DislikeMemeView(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        meme_id = request.GET['meme_id']
+
+        try:
+            meme = Meme.objects.get(id=int(meme_id))
+        except Meme.DoesNotExist:
+            return HttpResponse(-1)
+        except ValueError:
+            return HttpResponse(-1)
+
+        meme.dislikes = meme.dislikes + 1
+        meme.save()
+
+        return HttpResponse(meme.dislikes)
 
 class ProfileView(View):
     def get_user_details(self, username):
@@ -183,8 +201,7 @@ class ProfileView(View):
             return None
 
         user_profile = UserProfile.objects.get_or_create(user=user)[0]
-        form = UserProfileForm({'website': user_profile.website,
-                                'picture': user_profile.picture})
+        form = UserProfileForm({'picture': user_profile.picture})
         return (user, user_profile, form)
 
     @method_decorator(login_required)

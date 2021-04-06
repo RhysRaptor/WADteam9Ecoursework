@@ -13,7 +13,7 @@ class UserProfileForm(forms.ModelForm):
 
 	class Meta:
 		model = UserProfile
-		fields = ('website', 'picture', )
+		fields = ('picture', )
 
 
 class MemeForm(forms.ModelForm):
@@ -23,4 +23,4 @@ class MemeForm(forms.ModelForm):
 
 	class Meta:
 		model = Meme
-		exclude = ('category', 'likes', 'slug' )
+		exclude = ('category', 'likes', 'dislikes', 'slug' )
