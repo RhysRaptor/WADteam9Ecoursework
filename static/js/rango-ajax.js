@@ -6,7 +6,7 @@ $(document).ready(function() {
 		$.get('/rango/like_meme/',
 			{'meme_id': catememeIdVar},
 			function(data) {
-				$('#like_count').html(data);
+				$('#like_count').html(data)
 				$('#like_btn').hide();
 			})
 	});

@@ -34,12 +34,15 @@ def show_category(request, category_name_slug):
 
     try:
         category = Category.objects.get(slug=category_name_slug)
-        memes = Meme.objects.filter(category=category)
-        context_dict['memes'] = memes
+        meme_list = Meme.objects.filter(category=category)
+        paginator = Paginator(meme_list,1)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context_dict['page_obj'] = page_obj
         context_dict['category'] = category
     except Category.DoesNotExist:
         context_dict['category'] = None
-        context_dict['memes'] = None
+        context_dict['page_obj'] = None
 
     return render(request, 'rango/category.html', context=context_dict)
 
@@ -48,7 +51,7 @@ def add_meme(request, category_name_slug):
         category = Category.objects.get(slug=category_name_slug)
     except Category.DoesNotExist:
         category = None
-    
+
     if category is None:
         return redirect('/rango/')
 
@@ -76,32 +79,32 @@ def add_meme(request, category_name_slug):
 
 def register(request):
     registered = False
-    
+
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
-        
+
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
-            
+
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
 
             profile.save()
             registered = True
-        
+
         else:
             print(user_form.errors, profile_form.errors)
-            
+
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
-        
-    return render(request, 'rango/register.html', 
+
+    return render(request, 'rango/register.html',
                   context = {'user_form': user_form,
                              'profile_form': profile_form,
                              'registered': registered})
@@ -111,9 +114,9 @@ def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        
+
         user = authenticate(username=username, password=password)
-        
+
         if user:
             if user.is_active:
                 login(request, user)
@@ -121,18 +124,18 @@ def user_login(request):
 
             else:
                 return HttpResponse("Your account is disabled.")
-                
+
         else:
             print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
-            
+
     else:
         return render(request, 'rango/login.html')
-        
+
 @login_required
 def restricted(request):
     return render(request, 'rango/restricted.html')
-    
+
 @login_required
 def user_logout(request):
     logout(request)
@@ -175,7 +178,7 @@ class LikeMemeView(View):
         meme.save()
 
         return HttpResponse(meme.likes)
-        
+
 class DislikeMemeView(View):
     @method_decorator(login_required)
     def get(self, request):

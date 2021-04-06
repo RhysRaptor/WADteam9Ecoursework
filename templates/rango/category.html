@@ -24,47 +24,60 @@
 						</div>
 					</div>
 				</div>
-				{% if memes %}
-					{% for meme in memes %}
-					<div class="container">
-						<div class="img-box">
-							<p class="lead">{{meme.title}}</p>
-							<img src= "{{MEDIA_URL}}{{meme.image}}" alt="{{meme.title}}" width="300" height="400" class="rounded" /> <br />
-						</div>
-						<div class="p-3">
-							<strong id="like_count">{{ meme.likes }}</strong> likes
-							{% if user.is_authenticated %}
-							<button id="like_btn"
-									data-memeid="{{ meme.id }}"
-									class="btn btn-primary btn-sm"
-									type="button">
-								<span data-feather="thumbs-up"></span>
-								Like Meme
-							</button>
-							
-							{% endif %}
-						</div>
-						
-						<div class="p-3">
-							<strong id="dislike_count">{{ meme.dislikes }}</strong> dislikes
-							{% if user.is_authenticated %}
-							<button id="dislike_btn"
-									data-memeid="{{ meme.id }}"
-									class="btn btn-primary btn-sm"
-									type="button"
-									button class=red>
-								<span data-feather="thumbs-down"></span>
-								Dislike Meme
-							</button>
-							
-							{% endif %}
-						</div>
-						
-						
-						<hr>
-						<br />
-					</div>
-					{% endfor %}
+				{% if page_obj %}
+					<div>
+            			{% for meme in page_obj %}
+            				<h3>{{ meme.title }}</h3>
+            				<div  class="jumbotron p-3">
+            					<img src="{{MEDIA_URL}}{{meme.image}}" class="slider-img" max-width="500" height="400"/>
+            				</div>
+            				<div class ="p-3">
+            					<strong id="like_count">{{ meme.likes }}</strong> likes
+            					{% if user.is_authenticated %}
+            					<button id="like_btn"
+            							data-memeid="{{ meme.id }}"
+            							class="btn btn-primary btn-sm"
+            							type="button">
+            						<span data-feather="thumbs-up"></span>
+            						Like Meme
+            					</button>
+            					{% endif %}
+            				</div>
+
+            				<div class="p-3">
+            					<strong id="like_count">{{ meme.dislikes }}</strong> dislikes
+            					{% if user.is_authenticated %}
+            					<button id="dislike_btn"
+            							data-memeid="{{ meme.id }}"
+            							class="btn btn-primary btn-sm"
+            							type="button"
+            							button class=red>
+            						<span data-feather="thumbs-down"></span>
+            						Dislike Meme
+            					</button>
+            					{% endif %}
+            				</div>
+
+            			{% endfor %}
+            			<br />
+            			<div class ="pagination">
+            				<span class="step-links">
+            			        {% if page_obj.has_previous %}
+            			            <a class="btn btn-primary btn-sm" href="?page=1">&laquo; First</a>
+            			            <a class="btn btn-primary btn-sm" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            			        {% endif %}
+
+            			        <span class="current">
+            			            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            			        </span>
+
+            			        {% if page_obj.has_next %}
+            			            <a class="btn btn-primary btn-sm" href="?page={{ page_obj.next_page_number }}">next</a>
+            			            <a class="btn btn-primary btn-sm" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+            			        {% endif %}
+            		    	</span>
+            			</div>
+            		</div>
 				{% else %}
 					<strong>No memes currently in category.</strong>
 				{% endif %}

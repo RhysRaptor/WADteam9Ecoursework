@@ -25,12 +25,16 @@ LOGIN_URL = '/rango/login/'
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!8=zqyna8$f+i8a@kc-k7xuc-)h7l=_s80hd4*94uyzxika5&l'
+key = None
+with open('secret.key') as f:
+    key = f.read().strip()
+
+SECRET_KEY = key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['2469780M.pythonanywhere.com']
 
 
 # Application definition
