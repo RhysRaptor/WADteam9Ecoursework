@@ -15,17 +15,17 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 
 def index(request):
-    category_list = Category.objects.order_by('-likes')
-    meme_list = Meme.objects.order_by('-likes')[:1]
+    meme_list = Meme.objects.order_by('-likes')
 
-    context_dict = {}
-    context_dict['categories'] = category_list
-    context_dict['memes'] = meme_list
+    paginator = Paginator(meme_list,1)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
 
     visitor_cookie_handler(request)
-    context_dict['visits'] = request.session['visits']
 
-    response =  render(request, 'rango/index.html', context=context_dict)
+    response =  render(request, 'rango/index.html', {'page_obj': page_obj})
     return response
 
 
@@ -42,15 +42,6 @@ def show_category(request, category_name_slug):
         context_dict['memes'] = None
 
     return render(request, 'rango/category.html', context=context_dict)
-
-def allmemes(request):
-    meme_list = Meme.objects.all()
-    paginator = Paginator(meme_list,1)
-
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    return render(request, 'rango/allmemes.html', {'page_obj': page_obj})
 
 def add_meme(request, category_name_slug):
     try:

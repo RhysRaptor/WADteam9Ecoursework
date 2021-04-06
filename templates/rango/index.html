@@ -24,11 +24,13 @@
 		</div>
 	</div>
 	<div>
-		<h2>Most Liked Meme</h2>
-	{% if memes %}
-		<ul>
-			{% for meme in memes %}
-				<img src= "{{MEDIA_URL}}{{meme.image}}" alt="{{meme.title}}" width="300" height="400"/>
+	<body>
+		<div>
+			{% for meme in page_obj %}
+				<h1>{{ meme.title }}</h1>
+				<div class="img-box">
+					<img src="{{MEDIA_URL}}{{meme.image}}" class="slider-img" width="300" height="400"/>
+				</div>
 				<div>
 					<strong id="like_count">{{ meme.likes }}</strong> likes
 					{% if user.is_authenticated %}
@@ -42,10 +44,25 @@
 					{% endif %}
 				</div>
 			{% endfor %}
-		</ul>
-	{% else %}
-		<strong>There are no memes present.</strong>
-	{% endif %}
+			<div class ="pagination">
+				<span class="step-links">
+			        {% if page_obj.has_previous %}
+			            <a class="btn btn-primary btn-sm" href="?page=1">&laquo; Most Liked</a>
+			            <a class="btn btn-primary btn-sm" href="?page={{ page_obj.previous_page_number }}">previous</a>
+			        {% endif %}
+
+			        <span class="current">
+			            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+			        </span>
+
+			        {% if page_obj.has_next %}
+			            <a class="btn btn-primary btn-sm" href="?page={{ page_obj.next_page_number }}">next</a>
+			            <a class="btn btn-primary btn-sm" href="?page={{ page_obj.paginator.num_pages }}">Least Liked &raquo;</a>
+			        {% endif %}
+		    	</span>
+			</div>
+		</div>
+	</body>
 	</div>
 {% endblock %}
 	
