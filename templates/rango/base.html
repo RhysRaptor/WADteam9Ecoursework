@@ -39,7 +39,7 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'auth_logout' %}">Logout</a></li>
 						
                         {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'registration_register' %}">Register Here</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'rango:register' %}">Register Here</a></li>
                         <li class="nav-item "><a class="nav-link" href="{% url 'auth_login' %}">Login</a></li>
                         {% endif %}
                     </ul>

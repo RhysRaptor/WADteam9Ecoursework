@@ -9,6 +9,13 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'password',)
 
+class UserProfileForm(forms.ModelForm):
+
+	class Meta:
+		model = UserProfile
+		fields = ('website', 'picture', )
+
+
 class MemeForm(forms.ModelForm):
 	title = forms.CharField(max_length=128,
 							help_text="Please enter the title of the meme.")
