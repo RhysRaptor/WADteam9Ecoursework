@@ -15,4 +15,6 @@ urlpatterns = [
     path('like_meme/', views.LikeMemeView.as_view(), name='like_meme'),
     path('profile/<username>/', views.ProfileView.as_view(), name='profile'),
 
+    path('register/', views.register, name='register'),
+
 ]
